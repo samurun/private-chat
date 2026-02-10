@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Private Chat
 
-## Getting Started
+A real-time private chat application built with Next.js, ElysiaJS, and Upstash.
 
-First, run the development server:
+This project is inspired by [joschan21/nextjs16_realtime_chat](https://github.com/joschan21/nextjs16_realtime_chat).
+
+## 🚀 Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Backend**: [ElysiaJS](https://elysiajs.com/) (integrated within Next.js)
+- **Real-time**: [Upstash Realtime](https://upstash.com/docs/realtime) & [Redis](https://upstash.com/docs/redis)
+- **Data Fetching**: [TanStack React Query](https://tanstack.com/query/latest)
+- **UI Components**: [shadcn/ui](https://ui.shadcn.com/), [Radix UI](https://www.radix-ui.com/), [Base UI](https://base-ui.com/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **State Management**: React Hooks & TanStack Query
+- **Utilities**: `nanoid`, `date-fns`, `zod`
+
+## 🛠️ How to Use
+
+### 1. Prerequisites
+
+- [Bun](https://bun.sh/) installed on your machine.
+- An [Upstash](https://upstash.com/) account for Redis and Realtime.
+
+### 2. Installation
+
+Clone the repository and install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
+```
+
+### 3. Environment Variables
+
+Create a `.env` file in the root directory and add your Upstash credentials:
+
+```bash
+UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_rest_token
+```
+
+### 4. Running the Project
+
+Start the development server:
+
+```bash
 bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/`: Next.js App Router pages and layouts.
+- `components/`: Reusable UI components (shadcn/ui).
+- `screens/`: Page-specific screen components.
+- `lib/`: Utility functions and shared logic.
+- `hooks/`: Custom React hooks.
+- `proxy.ts`: ElysiaJS backend/proxy logic.
 
-## Learn More
+## 🔗 Reference
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Original concept and inspiration: [joschan21/nextjs16_realtime_chat](https://github.com/joschan21/nextjs16_realtime_chat)
