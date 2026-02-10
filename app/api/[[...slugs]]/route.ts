@@ -1,14 +1,13 @@
 import { redis } from "@/lib/redis"
-import { Elysia, } from "elysia"
+import { Elysia, t } from "elysia"
 import { nanoid } from "nanoid"
-import { z } from "zod"
-
 import { authMiddleware } from "./auth"
+import { z } from "zod"
 import { Message, realtime } from "@/lib/realtime"
 
 const ROOM_TTL_SECONDS = 60 * 10
 
-const room = new Elysia({ prefix: "/room" })
+const rooms = new Elysia({ prefix: "/room" })
   .post("/create", async () => {
     const roomId = nanoid()
 
@@ -100,7 +99,7 @@ const messages = new Elysia({ prefix: "/messages" })
     { query: z.object({ roomId: z.string() }) }
   )
 
-const app = new Elysia({ prefix: "/api" }).use(room).use(messages)
+const app = new Elysia({ prefix: "/api" }).use(rooms).use(messages)
 
 export const GET = app.fetch
 export const POST = app.fetch

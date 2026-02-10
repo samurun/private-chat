@@ -1,5 +1,5 @@
-import { Realtime, InferRealtimeEvents } from "@upstash/realtime"
-import { redis } from "./redis"
+import { redis } from "@/lib/redis"
+import { InferRealtimeEvents, Realtime } from "@upstash/realtime"
 import z from "zod"
 
 const message = z.object({
@@ -11,18 +11,15 @@ const message = z.object({
     token: z.string().optional(),
 })
 
-const destroy = z.object({
-    isDestroyed: z.literal(true),
-})
-
 const schema = {
     chat: {
         message,
-        destroy,
+        destroy: z.object({
+            isDestroyed: z.literal(true),
+        }),
     },
 }
 
 export const realtime = new Realtime({ schema, redis })
 export type RealtimeEvents = InferRealtimeEvents<typeof realtime>
-
 export type Message = z.infer<typeof message>
