@@ -9,7 +9,7 @@ const generateUsername = () => {
     return `anonymous-${word}-${nanoid(5)}`
 }
 
-export const useUsername = () => {
+export const useGenerateUsername = () => {
     const [username, setUsername] = useState("")
 
     useEffect(() => {
@@ -29,5 +29,5 @@ export const useUsername = () => {
         main()
     }, [])
 
-    return { username, setUsername }
+    return { username }
 }

@@ -1,8 +1,9 @@
 import { redis } from "@/lib/redis"
-import { Elysia, t } from "elysia"
+import { Elysia, } from "elysia"
 import { nanoid } from "nanoid"
-import { authMiddleware } from "./auth"
 import { z } from "zod"
+
+import { authMiddleware } from "./auth"
 import { Message, realtime } from "@/lib/realtime"
 
 const ROOM_TTL_SECONDS = 60 * 10
