@@ -11,6 +11,7 @@ import { Activity } from 'react';
 import { RoomFull } from '@/components/room-full';
 import { RoomDestroyed } from '@/components/room-destroyed';
 import { TerminalIcon } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function LobbyPage() {
   const { username } = useGenerateUsername();
@@ -21,14 +22,23 @@ export default function LobbyPage() {
 
   const { mutate: createRoom, isPending } = useMutation({
     mutationFn: async () => {
-      const response = await clientApi.room.create.post();
-      return response;
+      const { data, error } = await clientApi.room.create.post();
+
+      // ถ้ามี error จาก Eden Client ให้ throw ออกไป
+      if (error) {
+        // มันจะดึง { error: "..." } ที่คุณเขียนไว้ใน Schema ออกมา
+        throw error.value;
+      }
+
+      return data;
     },
     onSuccess: (data) => {
-      router.push(`/room/${data.data?.roomId}`);
+      router.push(`/room/${data.roomId}`);
     },
-    onError: (error) => {
-      console.error('Error creating room:', error);
+    onError: (err: any) => {
+      toast.error('Error creating room', {
+        description: err.error || '',
+      });
     },
   });
 
